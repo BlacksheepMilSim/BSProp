@@ -15,11 +15,11 @@ You can see a test of my lighting display at:
 https://www.youtube.com/watch?v=Nugx6jCNIlE&list=UUopygoJnO5FqQjX1YleXPjQ
 
 So far my parts list:
-Arduino MEGA
-4x4 Matrix Keypad
-20x4 LCD
-I2C LCD controller
-NeoPixel Strand
-Various smaller components for power control.
+   Arduino MEGA
+   4x4 Matrix Keypad
+   20x4 LCD
+   I2C LCD controller
+   NeoPixel Strand
+   Various smaller components for power control.
 
 
