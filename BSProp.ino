@@ -4,7 +4,7 @@
 #include <LiquidCrystal_I2C.h>
 //#include <LiquidCrystal.h>
 #include <SD.h>
-
+#include <Adafruit_NeoPixel.h>
 
 /*
  Blacksheep MilSim Prop
@@ -70,6 +70,7 @@ char BT_DEFUSER = 'x';   // not implemented
 
 //leds
 
+const int NEOPIN = 6;
 const int REDLED = 11;
 const int GREENLED = 10;
 //const int BLUELED = 12;
@@ -114,8 +115,8 @@ void setup(){
   Serial.begin(9600);
   //  lcd.init();                      // initialize the lcd 
   //  lcd.backlight();
-  lcd.setCursor(1,0);
   tone(tonepin,2400,30);
+  lcd.setCursor(1,0);  
   lcd.print("BLACKSHEEP MILSIM");// you can add your team name or someting cool
   lcd.setCursor(0,1);
   lcd.print("DIGITAL PROP SYSTEM");// you can add your team name or someting cool

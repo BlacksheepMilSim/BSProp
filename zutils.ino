@@ -2,7 +2,7 @@ void drawPorcent(byte porcent){
   //TODO: Optimize this code 
   int aDibujar=(10*porcent)/10;
   lcd.setCursor(0,2);
-
+  
   if(aDibujar<5)
   {
     switch(aDibujar){

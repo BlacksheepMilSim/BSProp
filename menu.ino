@@ -5,7 +5,7 @@ void menuPrincipal(){   //MAIN MENU
   digitalWrite(GREENLED, LOW); 
   digitalWrite(REDLED, LOW); 
 
-  //   if whe start a new game from another we need to restart propertly this variables
+  //   if we start a new game from another we need to restart propertly this variables
   doStatus=false;
   saStatus=false;
   sdStatus=false;
@@ -13,6 +13,8 @@ void menuPrincipal(){   //MAIN MENU
   cls();//clear lcd and set cursor to 0,0
   int i=0;
  // HERE YOU CAN ADD MORE ITEMS ON THE MAIN MENU
+  lcd.setCursor(5,0);  
+  lcd.print("MAIN MENU");
   lcd.setCursor(0,2);
   lcd.print(menu1[i]);
   checkArrows(i,3);
@@ -23,6 +25,8 @@ void menuPrincipal(){   //MAIN MENU
       tone(tonepin,2400,30);
       i--;
       cls();
+      lcd.setCursor(5,0);  
+      lcd.print("MAIN MENU");
       lcd.setCursor(0,2);
       lcd.print(menu1[i]);
       checkArrows(i,3);
@@ -32,6 +36,8 @@ void menuPrincipal(){   //MAIN MENU
       tone(tonepin,2400,30);
       i++;
       cls();
+      lcd.setCursor(5,0);  
+      lcd.print("MAIN MENU");      
       lcd.setCursor(0,2); 
       lcd.print(menu1[i]);    
       checkArrows(i,3);
@@ -64,7 +70,6 @@ void menuPrincipal(){   //MAIN MENU
       case 3:
         config();
         break;
-
       }
     }
   }
@@ -77,6 +82,9 @@ void config(){
   int i=0;
   
   delay(500);
+  lcd.setCursor(3,0);  
+  lcd.print("SETTINGS MENU");
+  lcd.setCursor(0,2);
   lcd.print(menu2[i]);
   checkArrows(i,3);
 
@@ -85,7 +93,10 @@ void config(){
     if(var == BT_UP && i>0){
       tone(tonepin,2400,30);
       i--;
-      lcd.clear();  
+      lcd.clear();
+      lcd.setCursor(3,0);  
+      lcd.print("SETTINGS MENU");
+      lcd.setCursor(0,2);  
       lcd.print(menu2[i]);
       checkArrows(i,3);
       delay(50);
@@ -94,7 +105,10 @@ void config(){
     if(var == BT_DOWN && i<3){
       tone(tonepin,2400,30);
       i++;
-      lcd.clear();  
+      lcd.clear();
+      lcd.setCursor(3,0);  
+      lcd.print("SETTINGS MENU");
+      lcd.setCursor(0,2);  
       lcd.print(menu2[i]);
       checkArrows(i,3);
       delay(50);
@@ -140,13 +154,20 @@ void configQuickGame(){
   if(sdStatus || doStatus || saStatus){
     menu1:
     cls();
+    lcd.setCursor(5,0);
+    if(doStatus)lcd.print("Domination");
+    lcd.setCursor(2,0);
+    if(sdStatus)lcd.print("Search & Destroy");
+    lcd.setCursor(6,0);
+    if(sdStatus)lcd.print("Sabotage");
+    lcd.setCursor(0,2);
     lcd.print(GAME_TIME);
     delay(100);
-    lcd.setCursor(0,1);
+    lcd.setCursor(0,3);
     lcd.print("00:00 hh:mm");
     lcd.cursor();
     lcd.blink();
-    lcd.setCursor(0,1);
+    lcd.setCursor(0,3);
     byte var2=0;
     for(int i=0;i<4;i++){ 
       while(1){
@@ -170,8 +191,8 @@ void configQuickGame(){
       }  
     }
     lcd.noCursor();
-    lcd.noBlink();
-    lcd.setCursor(13,1);
+    lcd.blink();
+    lcd.setCursor(16,3);
     lcd.print("ok?");
     //zona donde pasamos los items a
     //redibujar
@@ -183,7 +204,7 @@ void configQuickGame(){
         GAMEMINUTES= ((time[0]*600)+(time[1]*60)+(time[2]*10)+(time[3]));
         break;
       }    
-  if(var == 'c') // Cancel or Back Button :')
+      if(var == 'c') // Cancel or Back Button :')
       {
         tone(tonepin,2400,30);
         goto menu1;
@@ -244,13 +265,20 @@ void configQuickGame(){
         
     menu3:
     cls();
+    lcd.setCursor(5,0);
+    if(doStatus)lcd.print("Domination");
+    lcd.setCursor(2,0);
+    if(sdStatus)lcd.print("Search & Destroy");
+    lcd.setCursor(6,0);
+    if(sdStatus)lcd.print("Sabotage");
+    lcd.setCursor(0,2);
     lcd.print(ARM_TIME);
     delay(100);
-    lcd.setCursor(0,1);
+    lcd.setCursor(0,3);
     lcd.print(ZERO_SECS);
     lcd.cursor();
     lcd.blink();
-    lcd.setCursor(0,1);
+    lcd.setCursor(0,3);
     for(int i=0;i<2;i++){ 
       while(1){
         byte varu= getRealNumber();
@@ -263,8 +291,8 @@ void configQuickGame(){
       }  
     }
     lcd.noCursor();
-    lcd.noBlink(); 
-    lcd.setCursor(13,1);
+    lcd.blink(); 
+    lcd.setCursor(16,3);
     lcd.print("ok?");  
     
     //zona donde pasamos los items a
