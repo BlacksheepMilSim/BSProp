@@ -7,11 +7,11 @@
 
 
 /*
- Arduino Bomb Pro
- 
- The circuit:
- * More info at : http://yin.mainstreamds.com/
- If you need some help mail me to yinbot@gmail.com
+ Blacksheep MilSim Prop
+
+ Based largly off of
+ Arduino Bomb Pro - http://yin.mainstreamds.com/
+ original creator yinbot@gmail.com
  
  Original coding created 4,Sep, 2010
  Modified 24 May 2014
@@ -19,7 +19,7 @@
  
  Edited by:
  Zach Hanson
- 11 Nov 2014
+ 13 Nov 2014
  
  */
 
