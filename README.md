@@ -1,7 +1,7 @@
 BSProp
 ======
 
-Blacksheep MilSim Prototype Prop
+Blacksheep MilSim Arduino Prototype Airsoft Prop
 
 Based off the project located at:
 Arduino Bomb Pro - http://yin.mainstreamds.com/
