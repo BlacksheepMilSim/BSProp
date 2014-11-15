@@ -28,3 +28,20 @@ void theaterChase(uint32_t c, byte wait) {
     }
   }
 }
+
+void theaterChase2(uint32_t c, byte wait) {
+  for (int j=0; j<100; j++) {  //do 10 cycles of chasing
+    for (int q=0; q < 12; q++) {
+      for (int i=1;i < strip.numPixels(); i=i+12) {
+        strip.setPixelColor(i+q, c);    //turn every third pixel on
+      }
+      strip.show();
+     
+      delay(NEO_TIME);
+     
+      for (int i=0; i < strip.numPixels(); i=i+12) {
+        strip.setPixelColor(i+q, 0);        //turn every third pixel off
+      }
+    }
+  }
+}

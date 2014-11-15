@@ -83,7 +83,7 @@ void domination(){
         printTimeDom(timea, false);
         lcd.setCursor(10,3);
         printTimeDom(timeb, false);
-        theaterChase(strip.Color( 0, 127, 127), 50);
+        theaterChase(strip.Color( 0, 127, 0), 50);
         strip.show();
       }
       lcd.setCursor(2,2);
@@ -94,7 +94,7 @@ void domination(){
         lcd.setCursor(10,3);
         timeb = bravoTime + millis() - iZoneTime,false;
         printTimeDom(timeb, false);
-        theaterChase(strip.Color( 0, 127, 0), 50);
+        theaterChase(strip.Color( 127, 127, 0), 50);
         strip.show();
       
       }   
@@ -261,7 +261,9 @@ void domination(){
 }
 
 void gameOver(){
-
+  strip.begin();
+  theaterChase2(strip.Color( 127, 0, 0), 50);
+  strip.show();
   if(team==1)bravoTime+=millis()-iZoneTime;
   if(team==2)alphaTime+=millis()-iZoneTime;
   digitalWrite(GREENLED, LOW);
