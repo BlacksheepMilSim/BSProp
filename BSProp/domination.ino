@@ -12,6 +12,7 @@ void domination(){
   aTime=0;
   alphaTime=0;
   bravoTime=0;
+  
 
   int largoTono = 50;
   // 0 = neutral, 1 = alpha team, 2 = bravo team
@@ -43,37 +44,65 @@ void domination(){
     if(timeCalcVar >= 245 && timeCalcVar <= 255 && minutos-aTime/60000<2 && soundEnable)tone(tonepin,tonoActivada,largoTono);
     if(timeCalcVar >= 495 && timeCalcVar <= 510 && minutos-aTime/60000<4 && soundEnable)tone(tonepin,tonoActivada,largoTono);
     if(timeCalcVar >= 745 && timeCalcVar <= 760 && minutos-aTime/60000<2 && soundEnable)tone(tonepin,tonoActivada,largoTono);
+
+
+
     //Help to count 3 secs
-    if(a+2000<millis()){
-      a=millis();   
-      showGameTime=!showGameTime;
-      cls();
-    }
+//    if(a+2000<millis()){
+//      a=millis();   
+//      showGameTime=!showGameTime;
+//      cls();
+//    }
     //THE NEXT TO METHODS SHOW "GAME TIME" AND "CONTROLED ZONE TIME" IT SHOWS 2 AND 2 SEC EACH
 
-    if(showGameTime){ //THE SECOND IS /2
+//    if(showGameTime){ //THE SECOND IS /2
       lcd.setCursor(3,0);
       lcd.print("GAME TIME");
       lcd.setCursor(3,1);
       printTime(minutos, aTime);
-    }
-    else if (!showGameTime){
+//    }
+//    else if (!showGameTime){
 
       lcd.setCursor(4,2);
-      if(team == 0)lcd.print("NEUTRAL ZONE");
-      lcd.setCursor(2,2);
-      if(team == 1)lcd.print(" Alpha Control");
-      lcd.setCursor(2,2);
-      if(team == 2)lcd.print(" Bravo Control");
-        lcd.setCursor(1,3);      
-        printTimeDom(alphaTime, false);
-        lcd.setCursor(10,3);      
-        printTimeDom(bravoTime, false);
-      if(team>0){
-        lcd.setCursor(3,1);
-        printTimeDom(millis()-iZoneTime,false);
+      if(team == 0){
+        lcd.print("NEUTRAL ZONE");
+        lcd.setCursor(0,3);
+        printTimeDom(timea, false);
+        lcd.setCursor(10,3);
+        printTimeDom(timeb, false);
+        theaterChase(strip.Color(127, 127, 127), 50);
+        strip.show();
+        
       }
-    }
+      
+      lcd.setCursor(2,2);
+      if(team == 1){
+        lcd.print(" Alpha Conatrol");
+        lcd.setCursor(0,3);
+        timea = alphaTime + millis() - iZoneTime,false;
+        printTimeDom(timea, false);
+        lcd.setCursor(10,3);
+        printTimeDom(timeb, false);
+        theaterChase(strip.Color( 0, 127, 127), 50);
+        strip.show();
+      }
+      lcd.setCursor(2,2);
+      if(team == 2){
+        lcd.print(" Bravo Control");
+        lcd.setCursor(0,3);
+        printTimeDom(timea, false);
+        lcd.setCursor(10,3);
+        timeb = bravoTime + millis() - iZoneTime,false;
+        printTimeDom(timeb, false);
+        theaterChase(strip.Color( 0, 127, 0), 50);
+        strip.show();
+      
+      }   
+   //   if(team>0){
+   //     lcd.setCursor(10,3);
+   //     printTimeDom(millis()-iZoneTime,false);
+   //   }
+//    }
 
     //###########################CHECKINGS##################
 
@@ -121,12 +150,12 @@ void domination(){
           delay(1000);
 
           if(team==1){ 
-            bravoTime+=millis()-iZoneTime;
+            alphaTime = timea;
             iZoneTime=0; 
 
           }
           if(team==2){ 
-            alphaTime+=millis()-iZoneTime;
+            bravoTime = timeb;
             iZoneTime=0; 
           }
           team=0;

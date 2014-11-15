@@ -191,7 +191,7 @@ void configQuickGame(){
       }  
     }
     lcd.noCursor();
-    lcd.blink();
+    lcd.noBlink();
     lcd.setCursor(16,3);
     lcd.print("ok?");
     //zona donde pasamos los items a
@@ -291,7 +291,7 @@ void configQuickGame(){
       }  
     }
     lcd.noCursor();
-    lcd.blink(); 
+    lcd.noBlink(); 
     lcd.setCursor(16,3);
     lcd.print("ok?");  
     

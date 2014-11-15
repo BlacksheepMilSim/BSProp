@@ -70,7 +70,8 @@ char BT_DEFUSER = 'x';   // not implemented
 
 //leds
 
-const int NEOPIN = 6;
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(133, 6, NEO_GRB + NEO_KHZ800);
+const int NEO_TIME = 50;
 const int REDLED = 11;
 const int GREENLED = 10;
 //const int BLUELED = 12;
@@ -108,9 +109,13 @@ unsigned long timeCalcVar;
 unsigned long alphaTime;
 unsigned long bravoTime;
 unsigned long iZoneTime;//initial time for zone
+unsigned long timea;
+unsigned long timeb;
 byte team=0; // 0 = neutral, 1 = alpha team, 2 = bravo team
 
 void setup(){
+  strip.begin();
+  strip.show(); // Initialize all pixels to 'off'
   lcd.begin(20,4);         // initialize the lcd for 20 chars 4 lines
   Serial.begin(9600);
   //  lcd.init();                      // initialize the lcd 
@@ -121,7 +126,7 @@ void setup(){
   lcd.setCursor(0,1);
   lcd.print("DIGITAL PROP SYSTEM");// you can add your team name or someting cool
   lcd.setCursor(0,2);
-  lcd.print("V1.0 By Zach Hanson");// you can add your team name or someting cool
+  lcd.print("V0.2 By Zach Hanson");// you can add your team name or someting cool
   lcd.setCursor(2,3);
   lcd.print("Push ANY Button");
   keypad.waitForKey();
