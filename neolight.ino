@@ -11,21 +11,30 @@
 // and minimize distance between Arduino and first pixel.  Avoid connecting
 // on a live circuit...if you must, connect GND first.
 
-//Theatre-style crawling lights.
-void theaterChase(uint32_t c, byte wait) {
-  for (int j=0; j<1; j++) {  //do 10 cycles of chasing
-    for (int q=0; q < 12; q++) {
-      for (int i=1;i < strip.numPixels(); i=i+12) {
-        strip.setPixelColor(i+q, c);    //turn every third pixel on
+void theaterChase(uint32_t c, uint8_t waitNeo) {
+
+  static long theaterTime;
+  static int theaterCount;
+  static int theaterSwitch;
+
+  if((long)(theaterTime-millis())<=0){      
+    if(theaterCount>12){
+      theaterCount=0; 
+    }    
+    if(theaterSwitch==0){
+      for (int i=1; i < strip.numPixels(); i=i+12) {
+        strip.setPixelColor(theaterCount+i, c);    //turn every third pixel on
       }
       strip.show();
-     
-      delay(NEO_TIME);
-     
+      theaterTime=millis()+(long)waitNeo;
+    } 
+    else {
       for (int i=0; i < strip.numPixels(); i=i+12) {
-        strip.setPixelColor(i+q, 0);        //turn every third pixel off
+        strip.setPixelColor(theaterCount+i, 0);        //turn every third pixel off
       }
+      theaterCount++;
     }
+    theaterSwitch=!theaterSwitch;
   }
 }
 
@@ -37,7 +46,7 @@ void theaterChase2(uint32_t c, byte wait) {
       }
       strip.show();
      
-      delay(NEO_TIME);
+      delay(wait);
      
       for (int i=0; i < strip.numPixels(); i=i+12) {
         strip.setPixelColor(i+q, 0);        //turn every third pixel off

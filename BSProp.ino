@@ -71,7 +71,6 @@ char BT_DEFUSER = 'x';   // not implemented
 //leds
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(133, 6, NEO_GRB + NEO_KHZ800);
-const int NEO_TIME = 50;
 const int REDLED = 11;
 const int GREENLED = 10;
 //const int BLUELED = 12;

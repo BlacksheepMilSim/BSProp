@@ -20,6 +20,18 @@ void domination(){
   //Starting Game Code
   while(1)  // this is the important code, is a little messy but works good.
   {
+	static boolean enableNeo =false;
+	static long timerNeo;
+	static uint32_t colorNeo;
+  	static uint32_t waitNeo;
+  
+  if(enableNeo){		//is LED enabled
+	theaterChase(colorNeo, waitNeo);	//call function
+	if(millis()>timerNeo){		//if we have flashed for the desired time
+		enableNeo=false;		//disabled LED
+	}
+  }
+  
     if(endGame){
       gameOver();
     }
@@ -70,9 +82,12 @@ void domination(){
         printTimeDom(timea, false);
         lcd.setCursor(10,3);
         printTimeDom(timeb, false);
-        theaterChase(strip.Color(127, 127, 127), 50);
-        strip.show();
-        
+        theaterChase(strip.Color(127, 127, 127), 0.005);
+//        strip.show();
+//                enableNeo=true;		//turn on LED
+//		timerNeo=millis()+500;	//when they should stop flashing. 0.5 seconds from now.
+//		colorNeo=strip.Color(127, 127, 127);		//the color
+        	waitNeo=100;		//the wait time
       }
       
       lcd.setCursor(2,2);
