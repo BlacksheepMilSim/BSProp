@@ -186,12 +186,12 @@ void domination(){
           delay(1000);
 
           if(team==1){ 
-            alphaTime = timea;
+            alphaTime+= timea;
             iZoneTime=0; 
 
           }
           if(team==2){ 
-            bravoTime = timeb;
+            bravoTime+= timeb;
             iZoneTime=0; 
           }
           team=0;
@@ -252,7 +252,6 @@ void domination(){
     //getting to green zone
     while(cancelando && team == 0 )
     {
-      enableNeo=false;
       cls();
       lcd.setCursor(0,0);
       if(team==0)lcd.print("ALPHA CAPTURING ZONE");
@@ -300,8 +299,8 @@ void domination(){
 
 void gameOver(){
       
-  if(team==1)bravoTime+=millis()-iZoneTime;
-  if(team==2)alphaTime+=millis()-iZoneTime;
+  if(team==1)alphaTime+=millis()-iZoneTime;
+  if(team==2)bravoTime+=millis()-iZoneTime;
   digitalWrite(GREENLED, LOW);
   digitalWrite(YELLOWLED, LOW);
 
@@ -366,15 +365,12 @@ void gameOver(){
     if(var == '1' ){
       tone(tonepin,2400,30);
       cls();
-      strip.Color(0,0,0);
-      strip.show();
+      colorWipe(strip.Color(0, 0, 0), 0);
       break;
    }
   }
    }
   cls();
-  strip.Color(0,0,0);
-  strip.show();
   delay(100);
   lcd.print("Play Again?");
   lcd.setCursor(0,1);
