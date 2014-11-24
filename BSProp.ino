@@ -125,7 +125,7 @@ void setup(){
   lcd.setCursor(0,1);
   lcd.print("DIGITAL PROP SYSTEM");// you can add your team name or someting cool
   lcd.setCursor(0,2);
-  lcd.print("V0.2 By Zach Hanson");// you can add your team name or someting cool
+  lcd.print("V0.3 By Zach Hanson");// you can add your team name or someting cool
   lcd.setCursor(2,3);
   lcd.print("Push ANY Button");
   keypad.waitForKey();

@@ -39,6 +39,8 @@ void domination(){
     
     if(team == 0){
       theaterChase(strip.Color(127, 127, 127), 0);
+      digitalWrite(GREENLED, HIGH);
+      digitalWrite(YELLOWLED, HIGH);
     }
     
     if(team == 1){
@@ -154,6 +156,7 @@ void domination(){
       cls();
       lcd.setCursor(4,0);
       if(team>0)lcd.print("NEUTRALIZING");
+      allOff(); 
       unsigned int percent=0;
       unsigned long xTime=millis(); //start disabling time
       while(defuseando || cancelando)
@@ -174,12 +177,12 @@ void domination(){
         if(timeCalcVar >= 480 && timeCalcVar <= 500)
         {
           if(soundEnable)tone(tonepin,tonoAlarma2,200);
-          digitalWrite(YELLOWLED, LOW);
         }
 
         unsigned long seconds= millis() - xTime;
         percent = (seconds)/(ACTIVATESECONDS*10);
         drawPorcent(percent);
+        theaterChase2(strip.Color(45, 45, 45), 15);
 
         if(percent >= 100)
         {
@@ -195,6 +198,7 @@ void domination(){
             iZoneTime=0; 
           }
           team=0;
+          allOff();
           break;
         }
       }
@@ -209,6 +213,7 @@ void domination(){
       cls();
       lcd.setCursor(0,0);
       if(team==0)lcd.print("BRAVO CAPTURING ZONE");
+      allOff();
       unsigned int percent=0;
       unsigned long xTime=millis(); //start disabling time
       while(defuseando)
@@ -235,10 +240,13 @@ void domination(){
         unsigned long seconds= millis() - xTime;
         percent = (seconds)/(ACTIVATESECONDS*10);
         drawPorcent(percent);
-
+        theaterChase2(strip.Color(45, 45, 0), 15);
+//        perFill(strip.Color(45, 45, 0), 100, percent);
+                     
         if(percent >= 100)
         {
-          digitalWrite(GREENLED, LOW);
+          digitalWrite(GREENLED, HIGH);
+          allOff();
           team=2;
           iZoneTime=millis();
           delay(1000);
@@ -255,6 +263,7 @@ void domination(){
       cls();
       lcd.setCursor(0,0);
       if(team==0)lcd.print("ALPHA CAPTURING ZONE");
+      allOff();
       unsigned int percent=0;
       unsigned long xTime=millis(); //start disabling time
       while(cancelando)
@@ -281,10 +290,12 @@ void domination(){
         unsigned long seconds= millis() - xTime;
         percent = (seconds)/(ACTIVATESECONDS*10);
         drawPorcent(percent);
+        theaterChase2(strip.Color(0, 45, 0), 15);
 
         if(percent >= 100)
         {
-          digitalWrite(GREENLED, LOW);
+          digitalWrite(YELLOWLED, HIGH);
+          allOff();
           team=1;
           iZoneTime=millis();
           delay(1000);
