@@ -1,7 +1,7 @@
 
 void sabotage(){
   cls();
-  digitalWrite(REDLED, LOW); 
+  digitalWrite(YELLOWLED, LOW); 
   digitalWrite(GREENLED, LOW);   
   //SETUP INITIAL TIME 
   int minutos = GAMEMINUTES-1;
@@ -102,13 +102,13 @@ void sabotage(){
 
         if( timeCalcVar >= 0 && timeCalcVar <= 40)
         {
-          digitalWrite(REDLED, HIGH);  
+          digitalWrite(YELLOWLED, HIGH);  
           if(soundEnable)tone(tonepin,tonoAlarma1,200);
         }
         if(timeCalcVar >= 480 && timeCalcVar <= 520)
         {
           if(soundEnable)tone(tonepin,tonoAlarma2,200);
-          digitalWrite(REDLED, LOW);
+          digitalWrite(YELLOWLED, LOW);
         }
         unsigned long seconds= millis() - xTime;
         percent = (seconds)/(ACTIVATESECONDS*10);
@@ -121,7 +121,7 @@ void sabotage(){
         }
       }
       cls();
-      digitalWrite(REDLED, LOW);  
+      digitalWrite(YELLOWLED, LOW);  
     }
   }
 }
@@ -149,11 +149,11 @@ void destroySabotage(){
     timeCalcVar=(millis()- iTime)%1000;
     if(timeCalcVar >= 0 && timeCalcVar <= 40)
     {
-      digitalWrite(REDLED, HIGH);  
+      digitalWrite(YELLOWLED, HIGH);  
       if(soundEnable)tone(tonepin,tonoActivada,largoTono);
     }
     if(timeCalcVar >= 180 && timeCalcVar <= 220){
-      digitalWrite(REDLED, LOW);  
+      digitalWrite(YELLOWLED, LOW);  
     }
     //Sound 
 
@@ -187,7 +187,7 @@ void destroySabotage(){
     if('d' == keypad.getKey() && passwordEnable){
 
       cls();
-      digitalWrite(REDLED, LOW);  
+      digitalWrite(YELLOWLED, LOW);  
       digitalWrite(GREENLED, HIGH); 
       lcd.print(DISARMING);
       delay(1000);//a little delay to think in the password
@@ -214,7 +214,7 @@ void destroySabotage(){
     if(defuseando && !passwordEnable)// disarming bomb
     {
       lcd.clear();
-      digitalWrite(REDLED, LOW);
+      digitalWrite(YELLOWLED, LOW);
       lcd.setCursor(3,0);
       lcd.print(DISARM);
       lcd.setCursor(0,1);
@@ -249,7 +249,7 @@ void destroySabotage(){
           sabotage();   
         }
       }
-      digitalWrite(REDLED, LOW); 
+      digitalWrite(YELLOWLED, LOW); 
       digitalWrite(GREENLED, LOW);
       cls(); 
     }

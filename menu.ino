@@ -3,7 +3,7 @@
 void menuPrincipal(){   //MAIN MENU
 
   digitalWrite(GREENLED, LOW); 
-  digitalWrite(REDLED, LOW); 
+  digitalWrite(YELLOWLED, LOW); 
 
   //   if we start a new game from another we need to restart propertly this variables
   doStatus=false;

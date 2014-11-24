@@ -71,7 +71,7 @@ char BT_DEFUSER = 'x';   // not implemented
 //leds
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(133, 6, NEO_GRB + NEO_KHZ800);
-const int REDLED = 11;
+const int YELLOWLED = 11;
 const int GREENLED = 10;
 //const int BLUELED = 12;
 //mosfet
@@ -136,7 +136,7 @@ void setup(){
   pinMode(GREENLED, OUTPUT);     
 //  pinMode(8, OUTPUT);  
 //  digitalWrite(8,HIGH);
-  pinMode(REDLED, OUTPUT); 
+  pinMode(YELLOWLED, OUTPUT); 
   pinMode(mosfet, OUTPUT);  
   // CONFIGURE THE BARS OF PROGRESS BAR
   byte bar1[8] = {
@@ -252,7 +252,7 @@ void keypadEvent(KeypadEvent key){
 
 void disarmedSplash(){
   endGame = false;
-  digitalWrite(REDLED, LOW); 
+  digitalWrite(YELLOWLED, LOW); 
   digitalWrite(GREENLED, LOW);
   if(sdStatus || saStatus){
     lcd.clear();
@@ -269,7 +269,7 @@ void disarmedSplash(){
   lcd.print("Play Again?");
   lcd.setCursor(0,1);
   lcd.print("A : Yes B : No");
-  digitalWrite(REDLED, LOW);  
+  digitalWrite(YELLOWLED, LOW);  
   digitalWrite(GREENLED, LOW); 
   while(1)
   {
@@ -297,7 +297,7 @@ void disarmedSplash(){
 }
 
 void explodeSplash(){
-  digitalWrite(REDLED, LOW);  
+  digitalWrite(YELLOWLED, LOW);  
   digitalWrite(GREENLED, LOW); 
   cls();
   delay(100);

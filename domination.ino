@@ -36,6 +36,19 @@ void domination(){
       gameOver();
     }
     
+    
+    if(team == 0){
+      theaterChase(strip.Color(127, 127, 127), 0);
+    }
+    
+    if(team == 1){
+      theaterChase(strip.Color(0, 127, 0), 0);
+    }
+    
+    if(team == 2){
+      theaterChase(strip.Color(127, 127, 0), 0);
+    }
+    
     keypad.getKey();
     aTime=millis()- iTime;
     //Code for led blinking
@@ -43,12 +56,12 @@ void domination(){
     if(timeCalcVar >= 0 && timeCalcVar <= 40)
     {
       if(team==1)digitalWrite(GREENLED, HIGH);  
-      if(team==2)digitalWrite(REDLED, HIGH);  
+      if(team==2)digitalWrite(YELLOWLED, HIGH);  
     }
     if(timeCalcVar >= 50 && timeCalcVar <= 100)
     {    
       if(team==1)digitalWrite(GREENLED, LOW);  
-      if(team==2)digitalWrite(REDLED, LOW);
+      if(team==2)digitalWrite(YELLOWLED, LOW);
     }
     // Sound!!! same as Destroy 
     if(timeCalcVar >= 0 && timeCalcVar <= 40 && soundEnable)tone(tonepin,tonoActivada,largoTono);
@@ -82,12 +95,12 @@ void domination(){
         printTimeDom(timea, false);
         lcd.setCursor(10,3);
         printTimeDom(timeb, false);
-        theaterChase(strip.Color(127, 127, 127), 0.005);
+//        theaterChase(strip.Color(127, 127, 127), 50);
 //        strip.show();
-//                enableNeo=true;		//turn on LED
-//		timerNeo=millis()+500;	//when they should stop flashing. 0.5 seconds from now.
-//		colorNeo=strip.Color(127, 127, 127);		//the color
-        	waitNeo=100;		//the wait time
+                enableNeo=true;		//turn on LED
+		timerNeo=millis()+5000;	//when they should stop flashing. 0.5 seconds from now.
+		colorNeo=strip.Color(127, 127, 127);		//the color
+        	waitNeo=0;		//the wait time
       }
       
       lcd.setCursor(2,2);
@@ -98,8 +111,12 @@ void domination(){
         printTimeDom(timea, false);
         lcd.setCursor(10,3);
         printTimeDom(timeb, false);
-        theaterChase(strip.Color( 0, 127, 0), 50);
-        strip.show();
+//        theaterChase(strip.Color( 0, 127, 0), 50);
+//        strip.show();
+                enableNeo=true;		//turn on LED
+		timerNeo=millis()+5000;	//when they should stop flashing. 0.5 seconds from now.
+		colorNeo=strip.Color(0, 127, 0);		//the color
+        	waitNeo=0;		//the wait time
       }
       lcd.setCursor(2,2);
       if(team == 2){
@@ -109,8 +126,12 @@ void domination(){
         lcd.setCursor(10,3);
         timeb = bravoTime + millis() - iZoneTime,false;
         printTimeDom(timeb, false);
-        theaterChase(strip.Color( 127, 127, 0), 50);
-        strip.show();
+//        theaterChase(strip.Color( 127, 127, 0), 50);
+//        strip.show();
+                enableNeo=true;		//turn on LED
+		timerNeo=millis()+5000;	//when they should stop flashing. 0.5 seconds from now.
+		colorNeo=strip.Color(127, 127, 0);		//the color
+        	waitNeo=0;		//the wait time
       
       }   
    //   if(team>0){
@@ -126,7 +147,7 @@ void domination(){
     {
       gameOver();
     }
-
+    
     //Check If IS neutral
     while((defuseando || cancelando) && team > 0)
     {
@@ -153,7 +174,7 @@ void domination(){
         if(timeCalcVar >= 480 && timeCalcVar <= 500)
         {
           if(soundEnable)tone(tonepin,tonoAlarma2,200);
-          digitalWrite(REDLED, LOW);
+          digitalWrite(YELLOWLED, LOW);
         }
 
         unsigned long seconds= millis() - xTime;
@@ -184,6 +205,7 @@ void domination(){
 
     while(defuseando && team == 0 )
     {
+      enableNeo=false;
       cls();
       lcd.setCursor(0,0);
       if(team==0)lcd.print("BRAVO CAPTURING ZONE");
@@ -201,13 +223,13 @@ void domination(){
 
         if( timeCalcVar >= 0 && timeCalcVar <= 20)
         {
-          digitalWrite(REDLED, HIGH);  
+          digitalWrite(YELLOWLED, HIGH);  
           if(soundEnable)tone(tonepin,tonoAlarma1,200);
         }
         if(timeCalcVar >= 480 && timeCalcVar <= 500)
         {
           if(soundEnable)tone(tonepin,tonoAlarma2,200);
-          digitalWrite(REDLED, LOW);
+          digitalWrite(YELLOWLED, LOW);
         }
 
         unsigned long seconds= millis() - xTime;
@@ -224,12 +246,13 @@ void domination(){
         }
       }
       cls();
-      digitalWrite(REDLED, LOW);
+      digitalWrite(YELLOWLED, LOW);
     }
 
     //getting to green zone
     while(cancelando && team == 0 )
     {
+      enableNeo=false;
       cls();
       lcd.setCursor(0,0);
       if(team==0)lcd.print("ALPHA CAPTURING ZONE");
@@ -276,13 +299,13 @@ void domination(){
 }
 
 void gameOver(){
-  strip.begin();
-  theaterChase2(strip.Color( 127, 0, 0), 50);
-  strip.show();
+      
   if(team==1)bravoTime+=millis()-iZoneTime;
   if(team==2)alphaTime+=millis()-iZoneTime;
   digitalWrite(GREENLED, LOW);
-  digitalWrite(REDLED, LOW);
+  digitalWrite(YELLOWLED, LOW);
+
+ 
   while(!defuseando){
     keypad.getKey();
     if(defuseando){
@@ -290,49 +313,68 @@ void gameOver(){
       break;
     }
     lcd.clear();
-    lcd.setCursor(3,0);
-    lcd.print("TIME OVER!");
-    lcd.setCursor(0,1);
+    lcd.setCursor(5,0);
+    lcd.print("GAME OVER!");
 
     //check who team win the base
+    lcd.setCursor(0,1);
     if(bravoTime>alphaTime){
       //bravo team wins
-      lcd.print(" BRAVO TEAM WINS");
-      digitalWrite(GREENLED, HIGH);
+      lcd.print("BRAVO TEAM DOMINATED");
+      digitalWrite(YELLOWLED, HIGH);
     }
     else{
       //alphateam wins 
-      lcd.print("  ALPHA TEAM WIN");
-      digitalWrite(REDLED, HIGH);
+      lcd.print("ALPHA TEAM DOMINATED");
+      digitalWrite(GREENLED, HIGH);
     }
-    delay(3000);
-    keypad.getKey();
-    if(defuseando){
-      keypad.getKey();
-      break;
-    }
-    cls();
+//    delay(3000);
+//    keypad.getKey();
+//    if(defuseando){
+//      keypad.getKey();
+//      break;
+//    }
+//    cls();
+    lcd.setCursor(0,2);
     lcd.print("Alpha Time:");
-    lcd.setCursor(5,1);
+    lcd.setCursor(15,2);
     printTimeDom(alphaTime,false);
-    delay(3000);
-    keypad.getKey();
-    if(defuseando){
+//    delay(3000);
+//    keypad.getKey();
+//    if(defuseando){
       
-      break;
-    }
-    cls();
+//      break;
+//    }
+//    cls();
+    lcd.setCursor(0,3);
     lcd.print("Bravo Time:");
-    lcd.setCursor(5,1);
+    lcd.setCursor(15,3);
     printTimeDom(bravoTime,false);
-    delay(3000);
-    keypad.getKey();
-    if(defuseando){
-      keypad.getKey();
+//    delay(3000);
+//    keypad.getKey();
+//    if(defuseando){
+//      keypad.getKey();
+//      break;
+//    }
+
+    {
+
+    while(1){
+    theaterChase(strip.Color( 127, 0, 0), 10);
+    strip.show();    
+    var = keypad.getKey();
+    if(var == '1' ){
+      tone(tonepin,2400,30);
+      cls();
+      strip.Color(0,0,0);
+      strip.show();
       break;
-    }
+   }
   }
+   }
   cls();
+  strip.Color(0,0,0);
+  strip.show();
   delay(100);
   lcd.print("Play Again?");
   lcd.setCursor(0,1);
@@ -353,4 +395,7 @@ void gameOver(){
     }  
   } 
 }
+}
+
+
 
