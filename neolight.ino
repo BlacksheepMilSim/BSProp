@@ -47,3 +47,11 @@ void colorWipe(uint32_t c, uint8_t wait) {
   }
 }
 
+void allOff() {
+  for (int i=0; i < strip.numPixels(); i++) {
+    strip.setPixelColor(i, 0);
+  }
+  strip.show();
+}
+
+

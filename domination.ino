@@ -359,18 +359,18 @@ void gameOver(){
     {
 
     while(1){
-    theaterChase(strip.Color( 127, 0, 0), 10);
+    theaterChase(strip.Color( 65, 0, 0), 10);
     strip.show();    
     var = keypad.getKey();
     if(var == '1' ){
       tone(tonepin,2400,30);
       cls();
-      colorWipe(strip.Color(0, 0, 0), 0);
       break;
    }
   }
    }
   cls();
+  allOff();
   delay(100);
   lcd.print("Play Again?");
   lcd.setCursor(0,1);
